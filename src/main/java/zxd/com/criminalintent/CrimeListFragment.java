@@ -30,6 +30,11 @@ public class CrimeListFragment extends ListFragment {
         setListAdapter(adapter);
     }
     @Override
+    public void onResume(){
+        super.onResume();
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+    }
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);//这个地方也改过，见163页
         //Log.d(TAG, c.getTitle() + " was clicked");
