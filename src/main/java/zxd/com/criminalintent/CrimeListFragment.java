@@ -24,13 +24,13 @@ public class CrimeListFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(R.string.crimes_title);
         mCrimes = CrimeLab.get(getActivity()).getCrimes();
-        //ArrayAdapter<Crime> adapter = new CrimeAdapter(mCrimes);
-        ArrayAdapter<Crime> adapter = new ArrayAdapter<Crime>(getActivity(), android.R.layout.simple_list_item_1,mCrimes);
+        ArrayAdapter<Crime> adapter = new CrimeAdapter(mCrimes);
+        //ArrayAdapter<Crime> adapter = new ArrayAdapter<Crime>(getActivity(), android.R.layout.simple_list_item_1,mCrimes);
         setListAdapter(adapter);
     }
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
-        Crime c = (Crime)(getListAdapter()).getItem(position);
+        Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);//这个地方也改过，见163页
         Log.d(TAG, c.getTitle() + " was clicked");
     }
 
