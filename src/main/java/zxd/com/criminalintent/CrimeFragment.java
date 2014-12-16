@@ -1,14 +1,18 @@
 package zxd.com.criminalintent;
 
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -40,11 +44,17 @@ public class CrimeFragment extends Fragment {
         //UUID crimeId = (UUID)getActivity().getIntent().getSerializableExtra(EXTRA_CRIME_ID);
         UUID crimeId = (UUID) getArguments().getSerializable(EXTRA_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);//在CrimeLIstFragment里也有这句，我好像提前加上了。
     }
+    @TargetApi(11)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_crime, parent, false);//root时直接指向root
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            if (NavUtils.getParentActivityName(getActivity()) != null) {
+                getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
         mTitleField = (EditText)v.findViewById(R.id.crime_title);
         mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {//注意里面三个函数的位置略奇怪
@@ -107,6 +117,17 @@ public class CrimeFragment extends Fragment {
     }
     public void updateDate(){
         mDateButton.setText(mCrime.getDate().toString());
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case android.R.id.home:
+                if (NavUtils.getParentActivityName(getActivity()) != null){
+                    NavUtils.navigateUpFromSameTask(getActivity());
+                }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 
