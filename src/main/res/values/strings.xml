@@ -15,5 +15,15 @@
     <string name="subtitle">If you see something ,say something.</string>
     <string name="delete_crime">Delete</string>
     <string name="take">Take!</string>
+    <string name="crime_suspect_text">Choose Suspect</string>
+    <string name="crime_report_text">Send Crime Report</string>
+    <string name="crime_report">%1$s! Ther crime was discovered on %2$s. %3$3s, and %4$s</string>
+    <string name="crime_report_solved">The crime is sovled</string>
+    <string name="crime_report_unsolved">The crime is not sovled</string>
+    <string name="crime_report_suspect">The suspect is %s</string>
+    <string name="crime_report_no_suspect">There is no suspect</string>
+    <string name="crime_report_no_subject">CriminalIntetnt Crime Report</string>
+    <string name="crime_report_subject">CriminalIntent Crime Report</string>
+    <string name="send_report">Send crime report via</string>
 
 </resources>
